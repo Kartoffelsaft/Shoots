@@ -16,10 +16,8 @@ public class Enemy : KinematicBody
 
     private Spatial world;
     private Player targetPlayer;
-    private ulong targetPlayerId;
     private PackedScene bulletScene;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         timeSinceLastShot = 0;
@@ -28,8 +26,8 @@ public class Enemy : KinematicBody
         movementDirection = Vector3.Forward;
         rng = new Random();
         world = (Spatial)GetTree().CurrentScene;
-        targetPlayer = GetTree().CurrentScene.GetNode<Player>("Player");
-        targetPlayerId = targetPlayer.GetInstanceId();
+        if(world.HasNode("Player"))
+        { targetPlayer = GetTree().CurrentScene.GetNode<Player>("Player"); }
         bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
     }
 

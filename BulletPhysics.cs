@@ -15,7 +15,6 @@ public class BulletPhysics : KinematicBody
     private Position3D bulletParent;
     private MeshInstance explosion;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         age = 0;

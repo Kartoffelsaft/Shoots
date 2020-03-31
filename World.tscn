@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://ShotDetector.cs" type="Script" id=2]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://EnemySpawner.cs" type="Script" id=4]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 period = 72.7
@@ -51,8 +51,6 @@ transform = Transform( -1.62921e-07, 0.766044, -0.642788, 0, 0.642788, 0.766044,
 fov = 71.8
 size = 40.0
 
-[node name="Mouse" type="RayCast" parent="Camera"]
-
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.04547, 0 )
 collision_layer = 4
@@ -78,5 +76,8 @@ shape = SubResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 shape = SubResource( 8 )
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, 0 )
+[node name="EnemySpawner" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0 )
+script = ExtResource( 4 )
+spawnInterval = 3.0
+spawnRadius = 10.0

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="BulletPhysics.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemySpawner.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShotDetector.cs" />

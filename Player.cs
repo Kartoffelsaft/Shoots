@@ -10,7 +10,6 @@ public class Player : KinematicBody
     private Vector3 velocity = new Vector3();
     private PackedScene bulletScene;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
