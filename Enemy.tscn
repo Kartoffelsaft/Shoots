@@ -6,6 +6,7 @@
 radius = 0.533164
 
 [sub_resource type="SpatialMaterial" id=2]
+params_specular_mode = 3
 albedo_color = Color( 1, 0.188235, 0.188235, 1 )
 metallic = 0.73
 metallic_specular = 0.19

@@ -46,7 +46,7 @@ public class BulletPhysics : KinematicBody
     {
         age += delta;
 
-        if(!exploded && age > timeout)
+        if(age > timeout)
         { Explode(); }
 
         if(exploded)
@@ -62,11 +62,14 @@ public class BulletPhysics : KinematicBody
 
     private void Explode()
     {
-        explosionTime = age;
-        exploded = true;
-        explosion.Visible = true;
+        if(!exploded)
+        {
+            explosionTime = age;
+            exploded = true;
+            explosion.Visible = true;
 
-        var sound = bulletParent.GetNode<AudioStreamPlayer3D>("ExplosionNoise");
-        sound.Play();
+            var sound = bulletParent.GetNode<AudioStreamPlayer3D>("ExplosionNoise");
+            sound.Play();
+        }
     }
 }

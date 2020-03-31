@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://ShotDetector.cs" type="Script" id=2]
@@ -15,7 +15,7 @@ noise = SubResource( 1 )
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.145098, 0.290196, 0.0509804, 1 )
 normal_enabled = true
-normal_scale = -1.75
+normal_scale = -0.35
 normal_texture = SubResource( 2 )
 
 [sub_resource type="PlaneMesh" id=4]
@@ -33,6 +33,11 @@ radius = 0.5
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 0.511656
+
+[sub_resource type="Environment" id=9]
+ambient_light_color = Color( 0.368627, 0.52549, 0.611765, 1 )
+ssao_enabled = true
+adjustment_enabled = true
 
 [node name="World" type="Spatial"]
 
@@ -81,3 +86,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0 )
 script = ExtResource( 4 )
 spawnInterval = 3.0
 spawnRadius = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 9 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.421283, 0.784551, -0.454974, -0.532189, 0.620064, 0.576451, 0.734368, -0.000716975, 0.678751, 0, 8.10057, 36.8343 )
+light_color = Color( 0.976471, 0.992157, 0.517647, 1 )
+shadow_enabled = true
