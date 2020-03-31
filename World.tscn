@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player.cs" type="Script" id=1]
+[ext_resource path="res://ShotDetector.cs" type="Script" id=2]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 72.7
+persistence = 0.646
+lacunarity = 3.12
+
+[sub_resource type="NoiseTexture" id=2]
+noise = SubResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.145098, 0.290196, 0.0509804, 1 )
+normal_enabled = true
+normal_scale = -1.75
+normal_texture = SubResource( 2 )
+
+[sub_resource type="PlaneMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 100, 100 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.427451, 0.411765, 0.992157, 1 )
+
+[sub_resource type="CapsuleMesh" id=6]
+material = SubResource( 5 )
+radius = 0.5
+
+[sub_resource type="HeightMapShape" id=7]
+
+[sub_resource type="CapsuleShape" id=8]
+radius = 0.511656
+
+[node name="World" type="Spatial"]
+
+[node name="Floor" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0 )
+__meta__ = {
+"_editor_description_": "Floor location"
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1.62921e-07, 0.766044, -0.642788, 0, 0.642788, 0.766044, 1, 1.24805e-07, -1.04723e-07, -6.107, 10.0498, 0 )
+fov = 71.8
+size = 40.0
+
+[node name="Mouse" type="RayCast" parent="Camera"]
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.04547, 0 )
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 1 )
+speed = 20.0
+weight = 20.0
+friction = 2.0
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="ShotDetector" type="StaticBody" parent="Player"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/ShotDetector"]
+transform = Transform( 400, 0, 0, 0, -4.37114e-08, -400, 0, 1, -1.74846e-05, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+shape = SubResource( 8 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, 0 )
