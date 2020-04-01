@@ -38,6 +38,12 @@ public class Player : KinematicBody
         MoveAndCollide(velocity * delta);
     }
 
+    public override void _ExitTree()
+    {
+        var gameOverMenu = GetTree().Root.GetNode<PopupMenu>("World/Camera/GameOverMenu");
+        gameOverMenu.Visible = true;
+    }
+
     public void ShootTowards(Vector3 where)
     {
         var newBullet = (Position3D)bulletScene.Instance();

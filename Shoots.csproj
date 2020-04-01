@@ -56,8 +56,10 @@
     <Compile Include="BulletPhysics.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemySpawner.cs" />
+    <Compile Include="GameOverMenu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScoreCount.cs" />
     <Compile Include="ShotDetector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://ShotDetector.cs" type="Script" id=2]
+[ext_resource path="res://ScoreCount.cs" type="Script" id=3]
 [ext_resource path="res://EnemySpawner.cs" type="Script" id=4]
+[ext_resource path="res://GameOverMenu.cs" type="Script" id=5]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 period = 72.7
@@ -22,6 +24,13 @@ normal_texture = SubResource( 2 )
 material = SubResource( 3 )
 size = Vector2( 100, 100 )
 
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://FiraSans-Bold.otf"
+
+[sub_resource type="DynamicFont" id=11]
+size = 24
+font_data = SubResource( 10 )
+
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.427451, 0.411765, 0.992157, 1 )
 
@@ -37,7 +46,6 @@ radius = 0.511656
 [sub_resource type="Environment" id=9]
 ambient_light_color = Color( 0.368627, 0.52549, 0.611765, 1 )
 ssao_enabled = true
-adjustment_enabled = true
 
 [node name="World" type="Spatial"]
 
@@ -55,6 +63,25 @@ material/0 = null
 transform = Transform( -1.62921e-07, 0.766044, -0.642788, 0, 0.642788, 0.766044, 1, 1.24805e-07, -1.04723e-07, -6.107, 10.0498, 0 )
 fov = 71.8
 size = 40.0
+
+[node name="ScoreCount" type="Label" parent="Camera"]
+margin_left = 10.0
+margin_top = 10.0
+size_flags_stretch_ratio = 12.2
+custom_fonts/font = SubResource( 11 )
+text = "Shoot enemies to gain score!"
+uppercase = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverMenu" type="PopupMenu" parent="Camera"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 150.0
+margin_bottom = 100.0
+script = ExtResource( 5 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.04547, 0 )
@@ -94,3 +121,4 @@ environment = SubResource( 9 )
 transform = Transform( 0.421283, 0.784551, -0.454974, -0.532189, 0.620064, 0.576451, 0.734368, -0.000716975, 0.678751, 0, 8.10057, 36.8343 )
 light_color = Color( 0.976471, 0.992157, 0.517647, 1 )
 shadow_enabled = true
+[connection signal="id_pressed" from="Camera/GameOverMenu" to="Camera/GameOverMenu" method="_on_GameOverMenu_id_pressed"]

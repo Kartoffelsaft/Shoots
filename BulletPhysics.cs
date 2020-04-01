@@ -34,11 +34,18 @@ public class BulletPhysics : KinematicBody
             if (collision != null)
             {
                 Explode();
-                if(collision.Collider is CollisionObject)
-                { ((CollisionObject)(collision.Collider)).QueueFree(); }
+                if (collision.Collider is CollisionObject
+                    && !(collision.Collider is BulletPhysics)
+                ){ ((CollisionObject)(collision.Collider)).QueueFree(); }
+
+                if(collision.Collider is Enemy)
+                {
+                    var scoreCount = GetTree().Root.GetNode<ScoreCount>("World/Camera/ScoreCount");
+                    scoreCount.IncrementScore();
+                }
             }
 
-            bulletParent.Translate(velocity);
+            bulletParent.Translate(velocity * delta);
         }
     }
 
@@ -53,7 +60,7 @@ public class BulletPhysics : KinematicBody
         {
             var explosionAge = age - explosionTime;
 
-            if(explosionAge > explosionTimeout)
+            if (explosionAge > explosionTimeout)
             { bulletParent.QueueFree(); }
 
             explosion.Scale = Vector3.One * (explosionAge/explosionTimeout) * explosionSize;
