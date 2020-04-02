@@ -24,26 +24,26 @@ normal_texture = SubResource( 2 )
 material = SubResource( 3 )
 size = Vector2( 100, 100 )
 
-[sub_resource type="DynamicFontData" id=10]
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://FiraSans-Bold.otf"
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=6]
 size = 24
-font_data = SubResource( 10 )
+font_data = SubResource( 5 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0.427451, 0.411765, 0.992157, 1 )
 
-[sub_resource type="CapsuleMesh" id=6]
-material = SubResource( 5 )
+[sub_resource type="CapsuleMesh" id=8]
+material = SubResource( 7 )
 radius = 0.5
 
-[sub_resource type="HeightMapShape" id=7]
+[sub_resource type="HeightMapShape" id=9]
 
-[sub_resource type="CapsuleShape" id=8]
+[sub_resource type="CapsuleShape" id=10]
 radius = 0.511656
 
-[sub_resource type="Environment" id=9]
+[sub_resource type="Environment" id=11]
 ambient_light_color = Color( 0.368627, 0.52549, 0.611765, 1 )
 ssao_enabled = true
 
@@ -68,7 +68,7 @@ size = 40.0
 margin_left = 10.0
 margin_top = 10.0
 size_flags_stretch_ratio = 12.2
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 6 )
 text = "Shoot enemies to gain score!"
 uppercase = true
 script = ExtResource( 3 )
@@ -93,7 +93,7 @@ weight = 20.0
 friction = 2.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Player"]
-mesh = SubResource( 6 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="ShotDetector" type="StaticBody" parent="Player"]
@@ -103,19 +103,20 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player/ShotDetector"]
 transform = Transform( 400, 0, 0, 0, -4.37114e-08, -400, 0, 1, -1.74846e-05, 0, 0, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="EnemySpawner" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0 )
 script = ExtResource( 4 )
-spawnInterval = 3.0
+spawnInterval = 5.0
+spawnIntervalChangeRate = -0.05
 spawnRadius = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 9 )
+environment = SubResource( 11 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
 transform = Transform( 0.421283, 0.784551, -0.454974, -0.532189, 0.620064, 0.576451, 0.734368, -0.000716975, 0.678751, 0, 8.10057, 36.8343 )

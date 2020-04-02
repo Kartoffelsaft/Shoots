@@ -4,6 +4,7 @@ using System;
 public class EnemySpawner : Position3D
 {
     [Export] public float spawnInterval;
+    [Export] public float spawnIntervalChangeRate;
     [Export] public float spawnRadius;
 
     private float timeSinceLastSpawn;
@@ -24,6 +25,9 @@ public class EnemySpawner : Position3D
     public override void _Process(float delta)
     {
         timeSinceLastSpawn += delta;
+
+        // roughly exponential decrease
+        spawnInterval += spawnIntervalChangeRate * spawnInterval * delta;
 
         if(timeSinceLastSpawn > spawnInterval)
         {
